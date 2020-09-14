@@ -1,8 +1,11 @@
+import './global.d.impel'
+import './models/User'
+ 
 import express from 'express';
 import mongoose from 'mongoose';
 import authRouter from './routs/authRouter'
 import bodyParser from 'body-parser'
-
+import requireAuth from './middleware/middleware';
 
 const mongoUri = 'mongodb+srv://admin:passwordpassword@cluster0.qq7lq.gcp.mongodb.net/test?retryWrites=true&w=majority&authSource=admin';
 mongoose.set('useUnifiedTopology', true)
@@ -36,8 +39,8 @@ app.use(bodyParser.json())
 app.use(authRouter)
 
 
-app.get('/', (req, res) => {
-    res.send("Hi there!")
+app.get('/', requireAuth, (req, res) => {
+    res.send((req.user as any)?.email)
 });
 
 app.listen(port, () => {
