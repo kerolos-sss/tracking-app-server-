@@ -1,11 +1,12 @@
 import './global.d.impel'
 import './models/User'
+import './models/Track'
  
 import express from 'express';
 import mongoose from 'mongoose';
 import authRouter from './routs/authRouter'
 import bodyParser from 'body-parser'
-import requireAuth from './middleware/middleware';
+import requireAuth from './middleware/requireAuth';
 
 const mongoUri = 'mongodb+srv://admin:passwordpassword@cluster0.qq7lq.gcp.mongodb.net/test?retryWrites=true&w=majority&authSource=admin';
 mongoose.set('useUnifiedTopology', true)
